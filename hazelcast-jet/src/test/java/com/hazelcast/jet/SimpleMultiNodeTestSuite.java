@@ -1,23 +1,29 @@
 package com.hazelcast.jet;
 
-import com.hazelcast.core.IList;
+import org.junit.Test;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import com.hazelcast.test.annotation.Repeat;
+import org.junit.experimental.categories.Category;
+
 import com.hazelcast.core.IMap;
-import com.hazelcast.jet.api.application.Application;
+import com.hazelcast.core.IList;
+import com.hazelcast.jet.spi.dag.DAG;
+
+import java.util.concurrent.TimeUnit;
+
+import com.hazelcast.jet.spi.dag.Vertex;
 import com.hazelcast.jet.base.JetBaseTest;
 import com.hazelcast.jet.impl.dag.EdgeImpl;
-import com.hazelcast.jet.impl.strategy.IListBasedShufflingStrategy;
-import com.hazelcast.jet.processors.DummyProcessor;
-import com.hazelcast.jet.processors.ListProcessor;
-import com.hazelcast.jet.processors.ReverseProcessor;
-import com.hazelcast.jet.spi.dag.DAG;
-import com.hazelcast.jet.spi.dag.Vertex;
-import com.hazelcast.test.HazelcastParallelClassRunner;
+
+
 import com.hazelcast.test.annotation.QuickTest;
-import java.util.concurrent.TimeUnit;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
+import com.hazelcast.jet.processors.ListProcessor;
+import com.hazelcast.jet.processors.DummyProcessor;
+import com.hazelcast.jet.api.application.Application;
+import com.hazelcast.jet.processors.ReverseProcessor;
+import com.hazelcast.test.HazelcastParallelClassRunner;
+import com.hazelcast.jet.impl.strategy.IListBasedShufflingStrategy;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,6 +36,7 @@ public class SimpleMultiNodeTestSuite extends JetBaseTest {
     }
 
     @Test
+    @Repeat(value = 500)
     public void shufflingListTest() throws Exception {
         System.out.println(System.nanoTime() + " --> shufflingListTest");
         Application application = createApplication("shufflingListTest");
@@ -70,6 +77,7 @@ public class SimpleMultiNodeTestSuite extends JetBaseTest {
     }
 
     @Test
+    @Repeat(value = 500)
     public void mapReverserTest() throws Exception {
         System.out.println(System.nanoTime() + " --> mapReverserTest");
         Application application = createApplication("mapReverserTest");
