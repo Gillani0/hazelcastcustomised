@@ -12,17 +12,18 @@ import com.hazelcast.jet.processors.ReverseProcessor;
 import com.hazelcast.jet.spi.dag.DAG;
 import com.hazelcast.jet.spi.dag.Vertex;
 import com.hazelcast.test.HazelcastParallelClassRunner;
+import com.hazelcast.test.annotation.QuickTest;
 import com.hazelcast.test.annotation.Repeat;
-import com.hazelcast.test.annotation.SlowTest;
-import java.util.concurrent.TimeUnit;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.assertEquals;
 
-@Category(SlowTest.class)
+@Category(QuickTest.class)
 @RunWith(HazelcastParallelClassRunner.class)
 public class SimpleMultiNodeTestSuite extends JetBaseTest {
     @BeforeClass

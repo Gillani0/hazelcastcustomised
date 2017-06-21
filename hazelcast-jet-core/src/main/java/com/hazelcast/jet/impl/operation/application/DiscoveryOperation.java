@@ -19,10 +19,14 @@ package com.hazelcast.jet.impl.operation.application;
 import com.hazelcast.jet.api.hazelcast.JetService;
 
 public class DiscoveryOperation extends AbstractJetApplicationRequestOperation {
+    @Override
+    public boolean returnsResponse() {
+        return true;
+    }
 
     @Override
-    public void run() throws Exception {
+    public Object getResponse() {
         JetService jetService = getService();
-        result = jetService.getApplicationManager().getLocalJetAddress();
+        return jetService.getApplicationManager().getLocalJetAddress();
     }
 }

@@ -54,10 +54,9 @@ public class ServerApplicationInvocation<T> extends AbstractApplicationInvocatio
             } else {
                 if (returnsResponse) {
                     InvocationBuilder ib = os.createInvocationBuilder(JetService.SERVICE_NAME, operation, address);
-                    return (T) ib.invoke().get();
+                    ib.invoke().get();
                 } else {
                     os.send(operation, address);
-                    return null;
                 }
             }
         } catch (Throwable e) {
