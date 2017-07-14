@@ -88,18 +88,20 @@ public enum Types implements DataType {
     private static final Map<Integer, DataType> TYPES = new Int2ObjectHashMap<DataType>();
 
     static {
-        CLASSES = new Class[Types.values().length - 2];
+        CLASSES = new Class[Types.values().length - 1];
         int i = 0;
 
         for (Types type : Types.values()) {
-            if (type.getClazz() == null || (type.getClazz().equals(Object.class))) {
+            if (type.getClazz() == null) {
                 continue;
             }
 
-            TYPES.put((int) type.getTypeID(), type);
-            CLASSES2_TYPES.put(type.getClazz(), type);
-            CLASSES[i] = type.getClazz();
-            i++;
+            if (!(type.getClazz().equals(Object.class))) {
+                TYPES.put((int) type.getTypeID(), type);
+                CLASSES2_TYPES.put(type.getClazz(), type);
+                CLASSES[i] = type.getClazz();
+                i++;
+            }
         }
     }
 
@@ -129,10 +131,6 @@ public enum Types implements DataType {
     }
 
     public static DataType getDataType(Object object) {
-        if (object == null) {
-            return Types.NULL;
-        }
-
         for (Class<?> clazz : CLASSES) {
             if (clazz.isAssignableFrom(object.getClass())) {
                 return CLASSES2_TYPES.get(clazz);
