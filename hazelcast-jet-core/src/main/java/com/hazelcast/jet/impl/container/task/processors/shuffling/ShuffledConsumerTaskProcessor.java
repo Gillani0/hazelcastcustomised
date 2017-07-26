@@ -38,7 +38,6 @@ import com.hazelcast.jet.spi.strategy.ShufflingStrategy;
 import com.hazelcast.nio.Address;
 import com.hazelcast.spi.partition.IPartition;
 import com.hazelcast.spi.NodeEngine;
-import com.hazelcast.util.HashUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -482,12 +481,12 @@ public class ShuffledConsumerTaskProcessor extends ConsumerTaskProcessor {
                     ) {
                 writers = cache.get(objectPartitionId);
             } else {
-                objectPartitionId = calculatePartitionId(object, calculationStrategy);
+                objectPartitionId = calculationStrategy.hash(object) % this.nodeEngine.getPartitionService().getPartitionCount();
                 writers = cache.get(objectPartitionId);
             }
         } else {
             //Send to another node
-            objectPartitionId = calculatePartitionId(object, calculationStrategy);
+            objectPartitionId = calculationStrategy.hash(object) % this.nodeEngine.getPartitionService().getPartitionCount();
         }
 
         Address address = this.nodeEngine.getPartitionService().getPartitionOwner(objectPartitionId);
@@ -519,10 +518,6 @@ public class ShuffledConsumerTaskProcessor extends ConsumerTaskProcessor {
         return markedNonPartitionedRemotes;
     }
 
-    private int calculatePartitionId(Object object, CalculationStrategy calculationStrategy) {
-        return HashUtil.hashToIndex(calculationStrategy.hash(object),
-                this.nodeEngine.getPartitionService().getPartitionCount());
-    }
 
     private void processCalculationStrategies(Object object) throws Exception {
         CalculationStrategy objectCalculationStrategy = null;
