@@ -14,18 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.dag;
+package com;
 
-import java.io.Serializable;
-
-/**
- * Represents abstract element of Direct acyclic graph:
- *
- * <pre>
- *     Vertex
- *     Edge
- *     Tap
- * </pre>
- */
-public interface DagElement extends Serializable {
+public class Dummy {
 }

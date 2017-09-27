@@ -19,7 +19,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hazelcast.jet</groupId>
+    <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast-jet-root</artifactId>
     <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
@@ -29,7 +29,9 @@
 
     <modules>
         <module>hazelcast-jet-core</module>
+        <module>hazelcast-jet-hadoop</module>
         <module>hazelcast-jet-java.util.stream</module>
+        <module>hazelcast-jet-batching</module>
         <module>hazelcast-jet-io</module>
     </modules>
 
