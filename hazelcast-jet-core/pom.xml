@@ -28,6 +28,7 @@
         <groupId>com.hazelcast.jet</groupId>
         <artifactId>hazelcast-jet-root</artifactId>
         <version>0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -52,15 +53,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-client</artifactId>
+            <version>${hazelcast.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.hazelcast.jet</groupId>
             <artifactId>hazelcast-jet-io</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
+
 
         <!--TEST DEPENDENCIES-->
         <dependency>
